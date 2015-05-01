@@ -103,6 +103,7 @@
     _numExposedCells++;
     if (cell.hasMine) {  // BOOM!
         _kablooey = YES;
+        
         return -1;
     }
     int n = cell.numSurroundingMines;
@@ -136,6 +137,8 @@
                     cell.exposed = YES;
                     _numExposedCells++;
                     return YES;
+                    
+                    
                 }
             }
         }                            

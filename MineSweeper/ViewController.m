@@ -131,6 +131,28 @@
         // BOOM!
         [bcell setImage:self.bombImage];
         [self updateScore:-1];
+        
+        const int W = self.mineField.width;
+        const int H = self.mineField.height;
+        
+        for (int r = 0; r < H; r++)
+            for (int c = 0; c < W; c++) {
+                Cell *cell = [self.mineField cellAtRow:r Col:c];
+                NSButtonCell *bcell = [self.minefieldMatrix cellAtRow:r column:c];
+                if (cell.hasMine) {
+                    [bcell setImage:self.bombImage];
+                    bcell.state = NSOffState;
+                } else {
+                    [bcell setImage: nil];
+                    bcell.state = NSOffState;
+                    if (cell.numSurroundingMines == 0) {
+                        bcell.title = @"";
+                    } else {
+                        bcell.title = [NSString stringWithFormat:@"%d", cell.numSurroundingMines];
+                    }
+                }
+            }
+        
         self.minefieldMatrix.enabled = NO;
         //bcell.title = @"X";
         // XXX
